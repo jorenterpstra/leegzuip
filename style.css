@@ -7,13 +7,13 @@ body {
   } 
   
 #total{
-  padding-top: 75px;
+  padding-top: 0px;
   text-align: center;
   font-size: 60px;
 }
   
 .donation-meter {
-    padding-top: 50px;
+    padding-top: 0px;
     width: 100px;
   }
   
