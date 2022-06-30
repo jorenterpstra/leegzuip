@@ -43,23 +43,36 @@ class State {
         this.geel = geel;
         this.blauw = blauw;
         this.rood = rood;
-        this.goal = 200;
     }
     increaseGeel(){this.geel = this.geel + 1}
     increaseBlauw(){this.blauw = this.blauw + 1}
     increaseRood(){this.rood = this.rood + 1}
+    
+    increaseRandom(){
+        let x = Math.random();
+        if(x < 0.3333){
+            this.increaseGeel();
+        }
+        else if(x < 0.6666){
+            this.increaseBlauw();
+        }
+        else{
+            this.increaseRood();
+        }
+    }
+
     total(){return this.geel + this.blauw + this.rood;}
     reset(){this.geel = 1; this.blauw = 1; this.rood = 1;}
     
     maximum(){return Math.max(this.geel, this.blauw, this.rood)}
     
-    geelPercentage(){ return (this.geel/this.maximum()) * this.percentageReached(); }
-    blauwPercentage(){ return (this.blauw/this.maximum()) * this.percentageReached(); }
-    roodPercentage(){ return (this.rood/this.maximum()) * this.percentageReached(); }
+    geelPercentage(){ return Math.min(0.98, this.percentageFactor() * this.geel/this.total()); }
+    blauwPercentage(){ return Math.min(0.98,this.percentageFactor() * this.blauw/this.total()); }
+    roodPercentage(){ return Math.min(0.98, this.percentageFactor() * this.rood/this.total()); }
     
-    percentageReached(){
-        return Math.min(0.985, this.total()/this.goal);
-    }
+    
+    percentageFactor(){ return 1.3; }
+    
 
     toJson = function() {
         let x = {geel: this.geel, blauw: this.blauw, rood: this.rood};
@@ -94,19 +107,36 @@ function update_view(){
 update_view();
 
 
-window.onkeydown= function(gfg){
-    console.log(gfg.keyCode);
-    if(gfg.keyCode === 49){
+
+let keyDisabled = false
+
+window.onkeyup = function(gfg){
+    keyDisabled = false
+}
+
+window.onkeydown = function(gfg){
+    if(keyDisabled) {return;}
+    // Q = 81
+    if(gfg.keyCode === 81){
+        keyDisabled = true;
         state.increaseGeel();
     };
-    if(gfg.keyCode === 50)
-   {
-       state.increaseBlauw();
-       
-   };
-    if(gfg.keyCode === 51){
+    // A = 65
+    if(gfg.keyCode === 65)
+    {
+        keyDisabled = true;
+        state.increaseBlauw();
+    };
+    // Z = 90
+    if(gfg.keyCode === 90){
+        keyDisabled = true;
         state.increaseRood();
     };
+    // Spatie = 32
+    if(gfg.keyCode === 32){
+        keyDisabled = true;
+        state.increaseRandom();
+    }
 
     update_view();
 };
