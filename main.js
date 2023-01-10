@@ -106,7 +106,11 @@ function update_view(){
 
 update_view();
 
-
+function tryReset(){
+    if (confirm('Weet je zeker dat je de tellers weer allemaal op 1 wilt zetten?')) {
+        state.reset();
+    }
+}
 
 let keyDisabled = false
 
@@ -136,6 +140,11 @@ window.onkeydown = function(gfg){
     if(gfg.keyCode === 32){
         keyDisabled = true;
         state.increaseRandom();
+    }
+    // comma = 188
+    if(gfg.keyCode === 188){
+        keyDisabled = true;
+        tryReset();
     }
 
     update_view();
