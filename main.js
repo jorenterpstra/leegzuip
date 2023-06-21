@@ -95,7 +95,7 @@ class State {
         if(koekje != ""){
             return State.fromJson(koekje);
         }
-        return new State(1,1,1);
+        return new State(0,0,0,0);
     }
 }
 

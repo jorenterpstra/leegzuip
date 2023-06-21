@@ -9,7 +9,8 @@ body {
 #total{
   padding-top: 0px;
   text-align: center;
-  font-size: 60px;
+  font-size: 80px;
+  margin-bottom: 10px;
 }
   
 .donation-meter {
@@ -39,13 +40,27 @@ body {
     text-align: center;
   }
   .donation-meter .goal {
-    font-size: 40px;
+    font-size: 60px;
+    border-radius: 8px;
+    margin-bottom: 10px;
   }
   .donation-meter .total {
     font-size: 16px;
     position: absolute;
     right: 35px;
   } 
+
+  .donation-meter .title {
+    font-family: Helvetica, sans-serif; /* Replace with your desired font */
+    font-size: 60px; /* Replace with your desired font size */
+    position: absolute;
+    bottom: -20; /* Adjust the position as needed */
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap; /* Make sure the text doesn't wrap */
+    padding: 0px 10px; /* Optional: add some padding */
+    border-radius: 8px;
+  }
   
   .bulb {
     background: #e5e5e5;
