@@ -67,7 +67,7 @@ class State {
     }
 
     total(){return this.geel + this.blauw + this.rood + this.paars;}
-    reset(){this.geel = 1; this.blauw = 1; this.rood = 1; this.paars = 1;}
+    reset(){this.geel = 0; this.blauw = 0; this.rood = 0; this.paars = 0;}
     
     maximum(){return Math.max(this.geel, this.blauw, this.rood, this.paars)}
     
