@@ -39,49 +39,55 @@ function setCookie(cname, cvalue, exdays) {
 
 
 class State {
-    constructor(geel, blauw, rood){
+    constructor(geel, blauw, rood, paars){
         this.geel = geel;
         this.blauw = blauw;
         this.rood = rood;
+        this.paars = paars;
     }
     increaseGeel(){this.geel = this.geel + 1}
     increaseBlauw(){this.blauw = this.blauw + 1}
     increaseRood(){this.rood = this.rood + 1}
+    increasePaars(){this.paars = this.paars + 1}
     
     increaseRandom(){
         let x = Math.random();
-        if(x < 0.3333){
+        if(x < 0.25){
             this.increaseGeel();
         }
-        else if(x < 0.6666){
+        else if(x < 0.5){
             this.increaseBlauw();
+        }
+        else if(x < 0.75){
+            this.increasePaars();
         }
         else{
             this.increaseRood();
         }
     }
 
-    total(){return this.geel + this.blauw + this.rood;}
-    reset(){this.geel = 1; this.blauw = 1; this.rood = 1;}
+    total(){return this.geel + this.blauw + this.rood + this.paars;}
+    reset(){this.geel = 1; this.blauw = 1; this.rood = 1; this.paars = 1;}
     
-    maximum(){return Math.max(this.geel, this.blauw, this.rood)}
+    maximum(){return Math.max(this.geel, this.blauw, this.rood, this.paars)}
     
     geelPercentage(){ return Math.min(0.98, this.percentageFactor() * this.geel/this.total()); }
     blauwPercentage(){ return Math.min(0.98,this.percentageFactor() * this.blauw/this.total()); }
     roodPercentage(){ return Math.min(0.98, this.percentageFactor() * this.rood/this.total()); }
+    paarsPercentage(){ return Math.min(0.98, this.percentageFactor() * this.paars/this.total()); }
     
     
     percentageFactor(){ return 1.3; }
     
 
     toJson = function() {
-        let x = {geel: this.geel, blauw: this.blauw, rood: this.rood};
+        let x = {geel: this.geel, blauw: this.blauw, rood: this.rood, paars: this.paars};
         x = JSON.stringify(x);
         return x;
     };
     static fromJson(json){
         let data = JSON.parse(json); // Parsing the json string.
-        return new State(data.geel, data.blauw, data.rood);
+        return new State(data.geel, data.blauw, data.rood, data.paars);
     }
     static loadFromKoekje(){
         let koekje = getCookie("staat");
@@ -100,6 +106,7 @@ function update_view(){
     setColor(state.geelPercentage(), state.geel, "geel");
     setColor(state.blauwPercentage(), state.blauw, "blauw");
     setColor(state.roodPercentage(), state.rood, "rood");
+    setColor(state.paarsPercentage(), state.paars, "paars");
     setTotal(state.total());
     setCookie("staat", state.toJson(), 12);
 }
@@ -119,23 +126,28 @@ window.onkeyup = function(gfg){
 }
 
 window.onkeydown = function(gfg){
+    //use the QWER keys to increase the counters
     if(keyDisabled) {return;}
     // Q = 81
     if(gfg.keyCode === 81){
         keyDisabled = true;
         state.increaseGeel();
-    };
-    // A = 65
-    if(gfg.keyCode === 65)
-    {
+    }
+    // W = 87
+    if(gfg.keyCode === 87){
         keyDisabled = true;
         state.increaseBlauw();
-    };
-    // Z = 90
-    if(gfg.keyCode === 90){
+    }
+    // E = 69
+    if(gfg.keyCode === 69){
         keyDisabled = true;
         state.increaseRood();
-    };
+    }
+    // R = 82
+    if(gfg.keyCode === 82){
+        keyDisabled = true;
+        state.increasePaars();
+    }
     // Spatie = 32
     if(gfg.keyCode === 32){
         keyDisabled = true;
@@ -146,6 +158,7 @@ window.onkeydown = function(gfg){
         keyDisabled = true;
         tryReset();
     }
+    // P = 80
 
     update_view();
 };

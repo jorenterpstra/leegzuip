@@ -75,9 +75,11 @@ body {
     right: -15px;
     z-index: 30;
   }
+
   .geel { background: #fbd14a;}
   .blauw { background: #4d53f2;}
   .rood { background: #f34e54;}
+  .paars { background: #a54df2;}
   
   
   main {
