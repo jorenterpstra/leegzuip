@@ -114,7 +114,7 @@ function update_view(){
 update_view();
 
 function tryReset(){
-    if (confirm('Weet je zeker dat je de tellers weer allemaal op 1 wilt zetten?')) {
+    if (confirm('Weet je zeker dat je de tellers weer allemaal op 0 wilt zetten?')) {
         state.reset();
     }
 }
