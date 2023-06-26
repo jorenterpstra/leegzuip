@@ -39,12 +39,14 @@ function setCookie(cname, cvalue, exdays) {
 
 
 class State {
+
     constructor(geel, blauw, rood, paars){
         this.geel = geel;
         this.blauw = blauw;
         this.rood = rood;
         this.paars = paars;
     }
+
     increaseGeel(){this.geel = this.geel + 1}
     increaseBlauw(){this.blauw = this.blauw + 1}
     increaseRood(){this.rood = this.rood + 1}
